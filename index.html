@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northfield University — Student Portal</title>
+  <link rel="stylesheet" href="legit.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="crest">NU</div>
+        <div>
+          <h1>Northfield University</h1>
+          <p class="tagline">Student Portal</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#">Admissions</a>
+        <a href="#">Academics</a>
+        <a href="#">Library</a>
+        <a href="#">Help Desk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="login-wrap">
+    <div class="login-card">
+      <div class="secure-badge">🔒 Secure Login — northfield.edu</div>
+      <h2>Sign in to your student account</h2>
+      <p class="sub">Use your university email and password.</p>
+
+      <form id="legitForm" novalidate>
+        <div class="field">
+          <label for="studentEmail">University Email</label>
+          <input type="email" id="studentEmail" name="email"
+                 placeholder="firstname.lastname@northfield.edu"
+                 autocomplete="username" aria-describedby="studentEmailError">
+          <p class="field-error" id="studentEmailError" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="studentPass">Password</label>
+          <input type="password" id="studentPass" name="password"
+                 placeholder="Enter your password"
+                 autocomplete="current-password" aria-describedby="studentPassError">
+          <p class="field-error" id="studentPassError" role="alert"></p>
+        </div>
+
+        <div class="row">
+          <label class="remember">
+            <input type="checkbox" id="rememberMe"> Remember my email
+          </label>
+          <a href="forgot-password.html" class="muted">Forgot password?</a>
+        </div>
+
+        <button type="submit" id="legitBtn">Sign In</button>
+      </form>
+
+      <div class="form-msg" id="formMsg" role="alert"></div>
+
+      <div class="link-row">
+        <span>New student?</span>
+        <a href="register.html">Create an account</a>
+      </div>
+
+
+          <!-- //CUTOFF -->
+
+      <!-- <p class="security-note">
+        This is a <strong>demo portal</strong> for an educational phishing-awareness exercise.
+        No credentials are sent anywhere. Demo account:
+        <code>student@northfield.edu</code> / <code>demo1234</code>.
+      </p>
+
+      <div class="demo-links">
+        <a href="indx.html" class="demo-link">➡️ Open the attacker's clone (for comparison)</a>
+        <a href="debrief.html" class="demo-link alt">📖 Read the debrief</a>
+      </div>
+    </div> -->
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Northfield University (fictional). Educational demo only.</p>
+  </footer>
+
+  <script src="validation.js"></script>
+  <script src="legit.js"></script>
+</body>
+</html>

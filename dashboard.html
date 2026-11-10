@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Northfield University</title>
+  <link rel="stylesheet" href="legit.css">
+  <style>
+    .dash { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+    .welcome { background: #fff; border-radius: 10px; padding: 24px 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-left: 5px solid #0b3d2e; margin-bottom: 22px; }
+    .welcome h1 { font-size: 22px; color: #0b3d2e; }
+    .welcome p { color: #555; font-size: 14px; margin-top: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .card h2 { font-size: 15px; color: #0b3d2e; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .course { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eef1f4; font-size: 14px; }
+    .course:last-child { border-bottom: none; }
+    .grade { font-weight: 700; color: #0b3d2e; }
+    .announce { font-size: 13px; line-height: 1.5; padding: 8px 0; border-bottom: 1px solid #eef1f4; }
+    .announce:last-child { border-bottom: none; }
+    .announce time { display: block; color: #888; font-size: 11px; margin-top: 2px; }
+    .logout { display: inline-block; margin-top: 18px; padding: 10px 18px; background: #0b3d2e; color: #fff; text-decoration: none; border-radius: 7px; font-size: 14px; font-weight: 600; }
+    .guard { display: none; }
+    .guard.show { display: block; text-align: center; padding: 40px; background: #fff; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="crest">NU</div>
+        <div>
+          <h1>Northfield University</h1>
+          <p class="tagline">Student Portal</p>
+        </div>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#">Courses</a>
+        <a href="#">Library</a>
+        <a href="#" id="logoutLink">Log Out</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dash">
+    <div id="dashContent" class="guard">
+      <div class="welcome">
+        <h1 id="welcomeName">Welcome back!</h1>
+        <p>You are signed in to the demo student portal. This page exists only to show the legitimate post-login flow.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>My Courses</h2>
+          <div class="course"><span>CS 101 — Intro to Programming</span><span class="grade">A</span></div>
+          <div class="course"><span>MATH 201 — Calculus II</span><span class="grade">B+</span></div>
+          <div class="course"><span>ENG 110 — Academic Writing</span><span class="grade">A-</span></div>
+          <div class="course"><span>PHYS 150 — Mechanics</span><span class="grade">B</span></div>
+        </div>
+
+        <div class="card">
+          <h2>Announcements</h2>
+          <div class="announce">Midterm schedule posted. <time>2 days ago</time></div>
+          <div class="announce">Library extended hours during exams. <time>5 days ago</time></div>
+          <div class="announce">Tuition payment deadline: Nov 30. <time>1 week ago</time></div>
+        </div>
+
+        <div class="card">
+          <h2>Quick Links</h2>
+          <div class="course"><span>📚 Course Registration</span></div>
+          <div class="course"><span>💳 Tuition &amp; Fees</span></div>
+          <div class="course"><span>🎓 Transcripts</span></div>
+          <div class="course"><span>🛠️ IT Help Desk</span></div>
+        </div>
+      </div>
+
+      <a href="index.html" class="logout" id="logoutBtn">Log Out</a>
+    </div>
+
+    <div id="notLoggedIn" class="guard show">
+      <h2>You are not signed in</h2>
+      <p style="margin:12px 0;color:#555;">Please log in through the student portal first.</p>
+      <a href="index.html" class="logout">Go to Login</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Northfield University (fictional). Educational demo only.</p>
+  </footer>
+
+  <script>
+const loggedIn = sessionStorage.getItem('uniLoggedIn') === 'true';
+const email = sessionStorage.getItem('uniEmail');
+const storedName = sessionStorage.getItem('uniName');
+
+if (loggedIn) {
+  document.getElementById('dashContent').classList.add('show');
+  document.getElementById('notLoggedIn').classList.remove('show');
+
+  if (storedName) {
+    document.getElementById('welcomeName').textContent = 'Welcome back, ' + storedName + '!';
+  } else if (email) {
+    const name = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    document.getElementById('welcomeName').textContent = 'Welcome back, ' + name + '!';
+  }
+}
+
+    function logout(e) {
+      e.preventDefault();
+      sessionStorage.removeItem('uniLoggedIn');
+      sessionStorage.removeItem('uniEmail');
+      sessionStorage.removeItem('uniName');
+      window.location.href = 'index.html';
+    }
+    document.getElementById('logoutLink').addEventListener('click', logout);
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
+  </script>
+</body>
+</html>

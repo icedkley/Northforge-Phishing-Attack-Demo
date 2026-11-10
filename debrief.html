@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debrief — Phishing Simulation</title>
+  <link rel="stylesheet" href="legit.css">
+  <style>
+    .debrief { max-width: 720px; margin: 40px auto; padding: 0 20px; }
+    .debrief-card { background: #fff; border-radius: 10px; padding: 32px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+    .debrief-card h1 { color: #b71c1c; font-size: 26px; margin-bottom: 12px; }
+    .debrief-card h2 { color: #0b3d2e; font-size: 18px; margin: 24px 0 10px; }
+    .debrief-card p, .debrief-card li { line-height: 1.65; color: #333; font-size: 14px; }
+    .debrief-card ul { margin-left: 20px; }
+    .captured { background: #fdecea; border: 1px solid #f5c6c0; border-radius: 8px; padding: 16px; margin: 16px 0; font-family: monospace; font-size: 13px; }
+    .captured .label { color: #b71c1c; font-weight: 700; }
+    .flag { background: #fff8e1; border-left: 4px solid #f9a825; padding: 12px 14px; margin: 10px 0; border-radius: 4px; font-size: 14px; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+    .compare div { background: #f4f6f8; padding: 14px; border-radius: 8px; font-size: 13px; }
+    .compare h3 { font-size: 14px; margin-bottom: 8px; }
+    .compare .legit h3 { color: #0b3d2e; }
+    .compare .phish h3 { color: #b71c1c; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .actions a { flex: 1; min-width: 160px; text-align: center; padding: 12px; border-radius: 7px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    .actions .primary { background: #0b3d2e; color: #fff; }
+    .actions .secondary { background: #eef1f4; color: #0b3d2e; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="crest">NU</div>
+        <div>
+          <h1>Northfield University</h1>
+          <p class="tagline">Phishing Awareness Training</p>
+        </div>
+      </div>
+      <nav><a href="index.html">Portal</a><a href="indx.html">Clone</a></nav>
+    </div>
+  </header>
+
+  <main class="debrief">
+    <div class="debrief-card">
+      <h1>🎣 You fell for the phishing simulation</h1>
+      <p>This was a <strong>training simulation</strong>. No credentials left your browser — they were stored only in <code>sessionStorage</code> and are deleted when you close this tab. But here's exactly what a real attacker would have captured:</p>
+
+      <div class="captured" id="capturedBox"></div>
+
+      <h2>🚩 What made the clone suspicious?</h2>
+      <div class="flag"><strong>1. The URL.</strong> The real portal is at <code>northfield.edu</code>. The clone was at a different path/file. Always check the address bar.</div>
+      <div class="flag"><strong>2. Urgency cue.</strong> The clone said "Your session has expired" to rush you into entering credentials.</div>
+      <div class="flag"><strong>3. Fake success.</strong> The clone showed a dashboard to keep you calm — then revealed a "session issue" only after your password was captured.</div>
+      <div class="flag"><strong>4. No real HTTPS indicator.</strong> The real site shows a lock and the correct domain; the clone's badge was just text.</div>
+      <div class="flag"><strong>5. Fake "forgot password".</strong> The clone also imitated the reset flow to harvest more email addresses — a second collection point.</div>
+      <div class="flag"><strong>6. Weaker validation.</strong> The real site enforces password strength at signup; the clone only checks that the password box isn't empty, because the attacker wants whatever you type.</div>
+      <div class="flag"><strong>7. The URL was a lookalike.</strong> The real page is <code>index.html</code>; the clone is <code>indx.html</code> — one missing letter. On the real internet this is <em>typosquatting</em>: <code>northfield.edu</code> vs <code>northfıeld.edu</code> (dotless i), <code>northfield-edu.com</code>, or <code>northfield.edu.login-secure.com</code>. The page can be pixel-perfect; the address is the tell.</div>
+
+      <h2>🔍 Side-by-side comparison</h2>
+      <div class="compare">
+        <div class="legit">
+          <h3>✅ Legitimate portal</h3>
+          <ul>
+            <li>URL matches <code>northfield.edu</code></li>
+            <li>No urgency language</li>
+            <li>Works only with the demo account</li>
+            <li>Real dashboard, no fake errors</li>
+          </ul>
+        </div>
+        <div class="phish">
+          <h3>❌ Attacker clone</h3>
+          <ul>
+            <li>Different URL / file path</li>
+            <li>"Session expired" urgency</li>
+            <li>Accepts <em>any</em> input</li>
+            <li>Fakes success, then reveals the theft</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>🛡️ How to protect yourself</h2>
+      <ul>
+        <li>Type the university URL directly, or use a bookmark.</li>
+        <li>Check the domain carefully — lookalikes use typos and extra subdomains.</li>
+        <li>Enable multi-factor authentication (MFA).</li>
+        <li>Use a password manager — it won't autofill on a fake domain.</li>
+        <li>Never enter credentials after clicking a link in an unsolicited email or SMS.</li>
+        <li>Treat "session expired — sign in again" prompts with suspicion: navigate to the site directly instead.</li>
+      </ul>
+
+      <div class="actions">
+        <a href="index.html" class="primary">Try the legitimate portal</a>
+        <a href="indx.html" class="secondary">Re-run the clone</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Northfield University (fictional). Educational demo only — no data is transmitted or stored.</p>
+  </footer>
+
+  <script>
+    const email = sessionStorage.getItem('phishEmail');
+    const pass = sessionStorage.getItem('phishPassword');
+    const ts = sessionStorage.getItem('phishTimestamp');
+    const box = document.getElementById('capturedBox');
+
+    if (email || pass) {
+      box.innerHTML = `
+        <div><span class="label">Email:</span> ${escapeHtml(email || '(none)')}</div>
+        <div><span class="label">Password:</span> ${escapeHtml(pass || '(none)')}</div>
+        <div><span class="label">Captured at:</span> ${escapeHtml(ts || 'unknown')}</div>
+        <div style="margin-top:8px;color:#b71c1c;"><strong>In a real attack, this would now be in the attacker's database.</strong></div>
+      `;
+    } else {
+      box.innerHTML = '<div>No credentials were captured in this session. Visit the <a href="indx.html">clone</a> first to see the effect.</div>';
+    }
+
+    sessionStorage.removeItem('phishEmail');
+    sessionStorage.removeItem('phishPassword');
+    sessionStorage.removeItem('phishTimestamp');
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[s]));
+    }
+  </script>
+</body>
+</html>
